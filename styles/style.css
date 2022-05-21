@@ -58,7 +58,12 @@ body {
     margin: 10px;
 }
 
+/* CLick Animation */
 .onclick {
-    background-color: grey;
-    box-shadow: 0 0 20px #ccc;;
+    animation-name: click_animation;
+    animation-duration: 150ms;
+}
+
+@keyframes click_animation {
+    to {background-color: grey; box-shadow: 0 0 20px #ccc}
 }
