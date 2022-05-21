@@ -55,6 +55,12 @@ function loose () {
     game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
 }
 
+// Generate Random Sequence
+var get_sequence = () => {
+    var round = [green, red, yellow, blue]
+return round[Math.floor(Math.random() * round.length)];
+}
+
 // onclick event listeners
 green.addEventListener("click" , click_green)
 red.addEventListener("click" , click_red)
