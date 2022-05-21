@@ -67,3 +67,18 @@ body {
 @keyframes click_animation {
     to {background-color: grey; box-shadow: 0 0 20px #ccc}
 }
+
+/* AI click animation */
+.AIclick {
+    animation-name: ai_animation;
+    animation-duration: 150ms;
+}
+
+@keyframes ai_animation {
+    to {background-color: rgb(0, 0, 0)}
+}
+
+/* loose */
+.youloose {
+    background-color: red;
+}
