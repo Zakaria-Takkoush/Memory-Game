@@ -13,19 +13,27 @@ var blue_sound = new Audio("assets\sounds\blue.mp3")
 
 // onclick functions
 function click_green () {
-    green_sound.play
+    green_sound.play()
+    green.classList.add("onclick")
 }
 
 function click_red () {
-    red_sound.play
+    red_sound.play()
+    red.classList.add("onclick")
 }
 
 function click_yellow () {
-    yellow_sound.play
+    yellow_sound.play()
+    yellow.classList.add("onclick")
 }
 
 function click_blue () {
-    blue_sound.play
+    blue_sound.play()
+    blue.classList.add("onclick")
 }
 
 // onclick event listeners
+green.addEventListener("click" , click_green)
+red.addEventListener("click" , click_red)
+yellow.addEventListener("click" , click_yellow)
+blue.addEventListener("click" , click_blue)
