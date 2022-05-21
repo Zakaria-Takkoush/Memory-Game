@@ -11,5 +11,21 @@ var red_sound = new Audio("assets\sounds\red.mp3")
 var yellow_sound = new Audio("assets\sounds\yellow.mp3")
 var blue_sound = new Audio("assets\sounds\blue.mp3")
 
-// sound event listerners
-green.addEventListener("click", green_sound.play)
+// onclick functions
+function click_green () {
+    green_sound.play
+}
+
+function click_red () {
+    red_sound.play
+}
+
+function click_yellow () {
+    yellow_sound.play
+}
+
+function click_blue () {
+    blue_sound.play
+}
+
+// onclick event listeners
