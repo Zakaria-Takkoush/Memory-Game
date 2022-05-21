@@ -4,12 +4,14 @@ var green = document.getElementById("green_box")
 var red = document.getElementById("red_box")
 var yellow = document.getElementById("yellow_box")
 var blue = document.getElementById("blue_box")
+var game_status = document.getElementsByClassName("header")
 
 // sound variables
 var green_sound = new Audio("assets/sounds/green.mp3")
 var red_sound = new Audio("assets/sounds/red.mp3")
 var yellow_sound = new Audio("assets/sounds/yellow.mp3")
 var blue_sound = new Audio("assets/sounds/blue.mp3")
+var loose_sound = new Audio("assets/sounds/wrong.mp3")
 
 // onclick functions
 function click_green () {
@@ -45,7 +47,12 @@ function click_blue () {
 }
 
 function loose () {
-
+    loose_sound.play()
+    document.body.classList.add("youloose")
+    setTimeout(function() {;
+        document.body.classList.remove("youloose")
+    },100 )
+    game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
 }
 
 // onclick event listeners
