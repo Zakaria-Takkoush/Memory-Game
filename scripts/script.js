@@ -101,7 +101,7 @@ function loose () {
         document.body.classList.remove("youloose")
     },100 )
     game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
-    press_to_start ()
+    start_game ()
 }
 
 // start the game function
@@ -124,9 +124,14 @@ function next_step() {
 // next round
 function next_round() {
     level += 1
+    game_status[0].textContent = `Level ${level} of 20`
     const next_seq = [...comp_seq]    // copy the computer sequence 
     next_seq.push(next_step())        // append a new random color from the next_step function
-    play_round(next_seq)
+    play_round(next_seq)                // generate the new sequence
+    cannot_click ()                    // call the functions that disables click event listerns
+    setTimeout(() => {                 // set a delay between computer turn and human turn
+        user_turn(level);
+      }, level * 600 + 1000);
 }
 
 // play each round
@@ -134,15 +139,36 @@ function play_round(arr) {
     for (let i = 0; i < arr.length; i++){
         if (arr[i] = "green") 
         { comp_click_green()}
-        if (arr[i] = "red")
+        else if (arr[i] = "red")
         { comp_click_red()}
-        if (arr[i] = "yellow") 
+        else if (arr[i] = "yellow") 
         { comp_click_yellow()}
-        if (arr[i] = "blue")
+        //if (arr[i] = "blue")
+        else
         { comp_click_blue()}
     }
 }
 
+// user turn
+function user_turn () {
+    can_click ()
+}
+
+// allow user click
+function can_click () {
+    green.addEventListener("click" , click_green)
+    red.addEventListener("click" , click_red)
+    yellow.addEventListener("click" , click_yellow)
+    blue.addEventListener("click" , click_blue)
+}
+
+// prevent user click
+function cannot_click () {
+    green.removeEventListener("click" , click_green)
+    red.removeEventListener("click" , click_red)
+    yellow.removeEventListener("click" , click_yellow)
+    blue.removeEventListener("click" , click_blue)
+}
 
 // win the game
 function win () {
