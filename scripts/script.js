@@ -21,7 +21,7 @@ var loose_sound = new Audio("assets/sounds/wrong.mp3")
 // function variables
 let player_seq = []       // player order
 let comp_seq = []         // computer order
-let level = 0;              // game level
+let level = 0;            // game level
 
 /*
     ----- Click Functions -----
@@ -106,17 +106,8 @@ function loose () {
 
 // start the game function
 function start_game () {
-    document.addEventListener("keypress", play())
-}
-
-function play () {
-    player_seq = []       
-    comp_seq = []         
-    flash = 0              
-    game_win = false
-    comp_turn = true
-    //console.log("started")
-
+    next_round()
+    game_status[0].innerHTML = "<h1>Game Started<br>Level 1</h1>"
 }
 
 /*
@@ -131,23 +122,25 @@ function next_step() {
 }
 
 // next round
-function next_rund() {
+function next_round() {
     level += 1
     const next_seq = [...comp_seq]    // copy the computer sequence 
     next_seq.push(next_step())        // append a new random color from the next_step function
+    play_round(next_seq)
 }
 
 // play each round
-function play_round(arr)
+function play_round(arr) {
     for (let i = 0; i < arr.length; i++){
         if (arr[i] = "green") 
         { comp_click_green()}
         if (arr[i] = "red")
-        { omp_click_red()}
+        { comp_click_red()}
         if (arr[i] = "yellow") 
         { comp_click_yellow()}
         if (arr[i] = "blue")
         { comp_click_blue()}
+    }
 }
 
 
@@ -172,11 +165,14 @@ function check () {
 
 
 // onclick event listeners
+/*
 green.addEventListener("click" , click_green)
 red.addEventListener("click" , click_red)
 yellow.addEventListener("click" , click_yellow)
 blue.addEventListener("click" , click_blue)
+*/
 
 
 // When page loaded, call the start_game function
-//start_game () 
+
+document.addEventListener('keypress', start_game);
