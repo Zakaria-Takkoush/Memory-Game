@@ -1,3 +1,7 @@
+/* 
+    ----- Used Variables -----
+*/
+
 // declare box vairables
 var game = document.getElementById("game_box")
 var green = document.getElementById("green_box")
@@ -20,6 +24,10 @@ let level = 0;              // game level
 let flash                  // computer chosen click
 let comp_turn              // identify turn (user pc)
 
+
+/*
+    ----- Click Functions -----
+*/
 
 // onclick functions
 function click_green () {
@@ -54,6 +62,39 @@ function click_blue () {
     },150 )
 }
 
+// computer click functions
+function comp_click_green() {
+    green_sound.play()
+    green.classList.add("compclick")
+    setTimeout(function() {;
+        green.classList.remove("compclick")
+    },150 )
+}
+
+function comp_click_red() {
+    red_sound.play()
+    red.classList.add("compclick")
+    setTimeout(function() {;
+        red.classList.remove("compclick")
+    },150 )
+}
+
+function comp_click_yellow() {
+    yellow_sound.play()
+    yellow.classList.add("compclick")
+    setTimeout(function() {;
+        yellow.classList.remove("compclick")
+    },150 )
+}
+
+function comp_click_blue() {
+    blue_sound.play()
+    blue.classList.add("compclick")
+    setTimeout(function() {;
+        blue.classList.remove("compclick")
+    },150 )
+}
+
 // When you lose
 function loose () {
     loose_sound.play()
@@ -80,6 +121,10 @@ function play () {
 
 }
 
+/*
+    ----- Random Pattern Generater ----- 
+*/
+
 // generate random color
 function next_step() {
     const tiles = [green, red, yellow, blue]
@@ -93,6 +138,8 @@ function next_rund() {
     const next_seq = [...comp_seq]    // copy the computer sequence 
     next_seq.push(next_step())        // append a new random color from the next_step function
 }
+
+// play each round
 
 
 // win the game
