@@ -25,7 +25,7 @@ let level = 0            // game level
 let index
 
 /*
-    ----- Click Functions -----
+    ----- User Click Functions -----
 */
 
 // onclick functions
@@ -35,8 +35,10 @@ function click_green () {
     setTimeout(function() {;
         green.classList.remove("onclick")
     },150 )
-    player_seq.push("green")
+    //player_seq.push("green")
     index = player_seq.push("green") - 1
+    console.log(player_seq)
+    console.log(comp_seq)
     check_final ()
     check_seq ()
     check_win ()
@@ -48,8 +50,10 @@ function click_red () {
     setTimeout(function() {;
         red.classList.remove("onclick")
     },150 )
-    player_seq.push("red")
+    //player_seq.push("red")
     index = player_seq.push("red") - 1
+    console.log(player_seq)
+    console.log(comp_seq)
     check_final ()
     check_seq ()
     check_win ()
@@ -61,8 +65,10 @@ function click_yellow () {
     setTimeout(function() {;
         yellow.classList.remove("onclick")
     },158 )
-    player_seq.push("yellow")
+    //player_seq.push("yellow")
     index = player_seq.push("yellow") - 1
+    console.log(player_seq)
+    console.log(comp_seq)
     check_final ()
     check_seq ()
     check_win ()
@@ -74,8 +80,10 @@ function click_blue () {
     setTimeout(function() {;
         blue.classList.remove("onclick")
     },150 )
-    player_seq.push("blue")
+    //player_seq.push("blue")
     index = player_seq.push("blue") - 1
+    console.log(player_seq)
+    console.log(comp_seq)
     check_final ()
     check_seq ()
     check_win ()
@@ -89,6 +97,10 @@ function comp_click_green() {
         green.classList.remove("compclick")
     },150 )
 }
+
+/*
+    ----- Computer CLick Functions -----
+*/
 
 function comp_click_red() {
     red_sound.play()
@@ -114,7 +126,7 @@ function comp_click_blue() {
     },150 )
 }
 
-// When you lose
+// Loosing Function
 function loose () {
     loose_sound.play()
     document.body.classList.add("youloose")
@@ -132,7 +144,7 @@ function loose () {
 // start the game function
 function start_game () {
     next_round()
-    game_status[0].innerHTML = "<h1>Game Started<br>Level 1</h1>"
+    document.removeEventListener('keypress', start_game);
 }
 
 /*
@@ -149,7 +161,7 @@ function next_step() {
 // next round
 function next_round() {
     level += 1
-    game_status[0].textContent = `Level ${level} of 20`
+    game_status[0].innerHTML = "<h1>Level: " + level + "</h1>"
     const next_seq = [...comp_seq]    // copy the computer sequence 
     next_seq.push(next_step())        // append a new random color from the next_step function
     play_round(next_seq)                // generate the new sequence
@@ -217,6 +229,7 @@ function check_final () {
       }
 }
 
+// check sequence on click
 function check_seq () {
     if (player_seq[index] !== comp_seq[index]) {
         loose ()
@@ -236,5 +249,3 @@ blue.addEventListener("click" , click_blue)
 // When page loaded, call the start_game function on keypress
 
 document.addEventListener('keypress', start_game);
-console.log(comp_seq)
-console.log(player_seq)
