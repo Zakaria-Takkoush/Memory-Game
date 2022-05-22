@@ -13,6 +13,14 @@ var yellow_sound = new Audio("assets/sounds/yellow.mp3")
 var blue_sound = new Audio("assets/sounds/blue.mp3")
 var loose_sound = new Audio("assets/sounds/wrong.mp3")
 
+// function variables
+let player_order = []       // player order
+let comp_order = []         // computer order
+let flash                   // computer chosen click
+let comp_turn               // identify turn (user pc)
+let game_start              // game start        
+let game_win                // game end win
+
 // onclick functions
 function click_green () {
     green_sound.play()
