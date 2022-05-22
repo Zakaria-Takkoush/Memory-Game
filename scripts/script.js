@@ -21,7 +21,8 @@ var loose_sound = new Audio("assets/sounds/wrong.mp3")
 // function variables
 let player_seq = []       // player order
 let comp_seq = []         // computer order
-let level = 0;            // game level
+let level = 0            // game level
+let index
 
 /*
     ----- Click Functions -----
@@ -34,6 +35,10 @@ function click_green () {
     setTimeout(function() {;
         green.classList.remove("onclick")
     },150 )
+    player_seq.push("green")
+    index = player_seq.push("green") - 1
+    check_final ()
+    check_seq ()
 }
 
 function click_red () {
@@ -42,6 +47,10 @@ function click_red () {
     setTimeout(function() {;
         red.classList.remove("onclick")
     },150 )
+    player_seq.push("red")
+    index = player_seq.push("red") - 1
+    check_final ()
+    check_seq ()
 }
 
 function click_yellow () {
@@ -50,6 +59,10 @@ function click_yellow () {
     setTimeout(function() {;
         yellow.classList.remove("onclick")
     },158 )
+    player_seq.push("yellow")
+    index = player_seq.push("yellow") - 1
+    check_final ()
+    check_seq ()
 }
 
 function click_blue () {
@@ -58,6 +71,10 @@ function click_blue () {
     setTimeout(function() {;
         blue.classList.remove("onclick")
     },150 )
+    player_seq.push("blue")
+    index = player_seq.push("blue") - 1
+    check_final ()
+    check_seq ()
 }
 
 // computer click functions
@@ -101,6 +118,10 @@ function loose () {
         document.body.classList.remove("youloose")
     },100 )
     game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
+    player_seq = []
+    comp_seq = []
+    level = 0
+
     start_game ()
 }
 
@@ -175,20 +196,23 @@ function win () {
     
 }
 
-// check player order with computer order
-function check () {
-    if (player_seq !== comp_seq) {
-        loose()
-        play()
-    }
-    if (player_seq.length == 15) {
-        game_win === true
-    }
-    if (level === player_seq.length) {
-        level++
-    }
+// check player sequence lemgth with computer sequence length ---> proceed to next round
+function check_final () {
+    if (player_seq.length === comp_seq.length) {
+        player_seq = [];
+        setTimeout(() => {
+          next_round();
+        }, 1000);
+        return;
+      }
 }
 
+function check_seq () {
+    if (player_seq[index] !== comp_seq[index]) {
+        loose ()
+        return;
+    }
+}
 
 // onclick event listeners
 /*
@@ -199,6 +223,8 @@ blue.addEventListener("click" , click_blue)
 */
 
 
-// When page loaded, call the start_game function
+// When page loaded, call the start_game function on keypress
 
 document.addEventListener('keypress', start_game);
+console.log(comp_seq)
+console.log(player_seq)
