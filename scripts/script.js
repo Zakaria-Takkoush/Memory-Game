@@ -39,6 +39,7 @@ function click_green () {
     index = player_seq.push("green") - 1
     check_final ()
     check_seq ()
+    check_win ()
 }
 
 function click_red () {
@@ -51,6 +52,7 @@ function click_red () {
     index = player_seq.push("red") - 1
     check_final ()
     check_seq ()
+    check_win ()
 }
 
 function click_yellow () {
@@ -63,6 +65,7 @@ function click_yellow () {
     index = player_seq.push("yellow") - 1
     check_final ()
     check_seq ()
+    check_win ()
 }
 
 function click_blue () {
@@ -75,6 +78,7 @@ function click_blue () {
     index = player_seq.push("blue") - 1
     check_final ()
     check_seq ()
+    check_win ()
 }
 
 // computer click functions
@@ -192,8 +196,14 @@ function cannot_click () {
 }
 
 // win the game
-function win () {
-    
+function check_win () {
+    if (player_seq.length === comp_seq.length) {
+        if (player_seq.length === 20) {
+            game_status[0].innerHTML = "<h1>YOU WON!<br>Press Any Key to Restart</h1>"
+            document.addEventListener('keypress', start_game);
+        return
+        }
+    }
 }
 
 // check player sequence lemgth with computer sequence length ---> proceed to next round
