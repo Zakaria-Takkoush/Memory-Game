@@ -62,6 +62,7 @@ function loose () {
         document.body.classList.remove("youloose")
     },100 )
     game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
+    press_to_start ()
 }
 
 // Generate Random Sequence
@@ -71,10 +72,12 @@ return pick[Math.floor(Math.random() * round.length)];
 }
 
 // start the game
-document.addEventListener("keypress", function(event) {
-	game_start = true
-    play()
-});
+function press_to_start () {
+    document.addEventListener("keypress", function(event) {
+        game_start = true
+        play()
+    });
+}
 
 function play () {
     player_order = []       
