@@ -17,6 +17,7 @@ var loose_sound = new Audio("assets/sounds/wrong.mp3")
 let player_order = []       // player order
 let comp_order = []         // computer order
 let flash                   // computer chosen click
+let round                   // game level
 let comp_turn               // identify turn (user pc)
 let game_start              // game start        
 let game_win                // game end win
@@ -65,8 +66,43 @@ function loose () {
 
 // Generate Random Sequence
 var get_sequence = () => {
-    var round = [green, red, yellow, blue]
-return round[Math.floor(Math.random() * round.length)];
+    var pick = [green, red, yellow, blue]
+return pick[Math.floor(Math.random() * round.length)];
+}
+
+// start the game
+document.addEventListener("keypress", function(event) {
+	game_start = true
+    play()
+});
+
+function play () {
+    player_order = []       
+    comp_order = []         
+    flash = 0              
+    game_win = false
+    comp_turn = true
+    //console.log("started")
+
+}
+
+// win the game
+function win () {
+    
+}
+
+// check player order with computer order
+function check () {
+    if (player_order !== comp_order) {
+        loose()
+        play()
+    }
+    if (player_order.length == 15) {
+        game_win === true
+    }
+    if (level === player_order.length) {
+        level++
+    }
 }
 
 // onclick event listeners
