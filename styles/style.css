@@ -68,8 +68,8 @@ body {
     to {background-color: grey; box-shadow: 0 0 20px #ccc}
 }
 
-/* AI click animation */
-.AIclick {
+/* computer click animation */
+.compclick {
     animation-name: ai_animation;
     animation-duration: 150ms;
 }

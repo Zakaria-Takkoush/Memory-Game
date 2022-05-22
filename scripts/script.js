@@ -1,3 +1,4 @@
+
 /* 
     ----- Used Variables -----
 */
@@ -21,9 +22,6 @@ var loose_sound = new Audio("assets/sounds/wrong.mp3")
 let player_seq = []       // player order
 let comp_seq = []         // computer order
 let level = 0;              // game level
-let flash                  // computer chosen click
-let comp_turn              // identify turn (user pc)
-
 
 /*
     ----- Click Functions -----
@@ -127,7 +125,7 @@ function play () {
 
 // generate random color
 function next_step() {
-    const tiles = [green, red, yellow, blue]
+    const tiles = ["green", "red", "yellow", "blue"]
     const random = tiles[Math.floor(Math.random() * tiles.length)]
     return random
 }
@@ -140,6 +138,17 @@ function next_rund() {
 }
 
 // play each round
+function play_round(arr)
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] = "green") 
+        { comp_click_green()}
+        if (arr[i] = "red")
+        { omp_click_red()}
+        if (arr[i] = "yellow") 
+        { comp_click_yellow()}
+        if (arr[i] = "blue")
+        { comp_click_blue()}
+}
 
 
 // win the game
@@ -161,6 +170,7 @@ function check () {
     }
 }
 
+
 // onclick event listeners
 green.addEventListener("click" , click_green)
 red.addEventListener("click" , click_red)
@@ -169,4 +179,4 @@ blue.addEventListener("click" , click_blue)
 
 
 // When page loaded, call the start_game function
-start_game () 
+//start_game () 
