@@ -23,73 +23,13 @@ let player_seq = []       // player order
 let comp_seq = []         // computer order
 let level = 0            // game level
 let index
+let next_seq = [...comp_seq]
+
 
 /*
-    ----- User Click Functions -----
+    ----- Computer CLick Functions -----
 */
 
-// onclick functions
-function click_green () {
-    green_sound.play()
-    green.classList.add("onclick")
-    setTimeout(function() {;
-        green.classList.remove("onclick")
-    },150 )
-    //player_seq.push("green")
-    index = player_seq.push("green") - 1
-    console.log(player_seq)
-    console.log(comp_seq)
-    check_final ()
-    check_seq ()
-    check_win ()
-}
-
-function click_red () {
-    red_sound.play()
-    red.classList.add("onclick")
-    setTimeout(function() {;
-        red.classList.remove("onclick")
-    },150 )
-    //player_seq.push("red")
-    index = player_seq.push("red") - 1
-    console.log(player_seq)
-    console.log(comp_seq)
-    check_final ()
-    check_seq ()
-    check_win ()
-}
-
-function click_yellow () {
-    yellow_sound.play()
-    yellow.classList.add("onclick")
-    setTimeout(function() {;
-        yellow.classList.remove("onclick")
-    },158 )
-    //player_seq.push("yellow")
-    index = player_seq.push("yellow") - 1
-    console.log(player_seq)
-    console.log(comp_seq)
-    check_final ()
-    check_seq ()
-    check_win ()
-}
-
-function click_blue () {
-    blue_sound.play()
-    blue.classList.add("onclick")
-    setTimeout(function() {;
-        blue.classList.remove("onclick")
-    },150 )
-    //player_seq.push("blue")
-    index = player_seq.push("blue") - 1
-    console.log(player_seq)
-    console.log(comp_seq)
-    check_final ()
-    check_seq ()
-    check_win ()
-}
-
-// computer click functions
 function comp_click_green() {
     green_sound.play()
     green.classList.add("compclick")
@@ -97,10 +37,6 @@ function comp_click_green() {
         green.classList.remove("compclick")
     },150 )
 }
-
-/*
-    ----- Computer CLick Functions -----
-*/
 
 function comp_click_red() {
     red_sound.play()
@@ -126,25 +62,38 @@ function comp_click_blue() {
     },150 )
 }
 
-// Loosing Function
-function loose () {
-    loose_sound.play()
-    document.body.classList.add("youloose")
-    setTimeout(function() {;
-        document.body.classList.remove("youloose")
-    },100 )
-    game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
-    player_seq = []
-    comp_seq = []
-    level = 0
-
-    start_game ()
-}
-
-// start the game function
-function start_game () {
-    next_round()
-    document.removeEventListener('keypress', start_game);
+/* 
+    ----- Computer Play Round -----
+*/
+// play each round
+function play_round(arr) {
+    for (let i = 0; i < arr.length; i++){
+        setTimeout(function() { 
+            if (arr[i] = "green") 
+            { comp_click_green()}
+            if (arr[i] = "red")
+            { comp_click_red()}       
+            if (arr[i] = "yellow") 
+            { comp_click_yellow()} 
+            if (arr[i] = "blue")
+            { comp_click_blue()}
+        }, 600)     
+        
+    }
+   /*
+    next_seq.forEach((color, index) => {
+        setTimeout(() => {
+            if (color = "green") 
+            { comp_click_green()}
+            if (color = "red")
+            { comp_click_red()}
+            if (color = "yellow") 
+            { comp_click_yellow()}
+            if (color = "blue")
+            { comp_click_blue()}
+        }, (index + 1) * 600)
+      })
+      */
 }
 
 /*
@@ -153,8 +102,8 @@ function start_game () {
 
 // generate random color
 function next_step() {
-    const tiles = ["green", "red", "yellow", "blue"]
-    const random = tiles[Math.floor(Math.random() * tiles.length)]
+    let tiles = ["green", "red", "yellow", "blue"]
+    let random = tiles[Math.floor(Math.random() * tiles.length)]
     return random
 }
 
@@ -162,28 +111,14 @@ function next_step() {
 function next_round() {
     level += 1
     game_status[0].innerHTML = "<h1>Level: " + level + "</h1>"
-    const next_seq = [...comp_seq]    // copy the computer sequence 
+    let next_seq = [...comp_seq]    // create a copy of the computer sequence 
     next_seq.push(next_step())        // append a new random color from the next_step function
     play_round(next_seq)                // generate the new sequence
     cannot_click ()                    // call the functions that disables click event listerns
     setTimeout(() => {                 // set a delay between computer turn and human turn
-        user_turn(level);
-      }, level * 600 + 1000);
-}
-
-// play each round
-function play_round(arr) {
-    for (let i = 0; i < arr.length; i++){
-        if (arr[i] = "green") 
-        { comp_click_green()}
-        else if (arr[i] = "red")
-        { comp_click_red()}
-        else if (arr[i] = "yellow") 
-        { comp_click_yellow()}
-        //if (arr[i] = "blue")
-        else
-        { comp_click_blue()}
-    }
+        user_turn(level)
+      }, level * 600 + 1000)
+    console.log(next_seq)
 }
 
 // user turn
@@ -237,6 +172,88 @@ function check_seq () {
     }
 }
 
+// start the game function
+function start_game () {
+    next_round()
+    document.removeEventListener('keypress', start_game);
+}
+
+/*
+    ----- User Click Functions -----
+*/
+
+// onclick functions
+function click_green () {
+    green_sound.play()
+    green.classList.add("onclick")
+    setTimeout(function() {;
+        green.classList.remove("onclick")
+    },150 )
+    //player_seq.push("green")
+    index = player_seq.push("green") - 1
+   // console.log(player_seq)
+    check_final ()
+    check_seq ()
+    check_win ()
+}
+
+function click_red () {
+    red_sound.play()
+    red.classList.add("onclick")
+    setTimeout(function() {;
+        red.classList.remove("onclick")
+    },150 )
+    //player_seq.push("red")
+    index = player_seq.push("red") - 1
+ //   console.log(player_seq)
+    check_final ()
+    check_seq ()
+    check_win ()
+}
+
+function click_yellow () {
+    yellow_sound.play()
+    yellow.classList.add("onclick")
+    setTimeout(function() {;
+        yellow.classList.remove("onclick")
+    },158 )
+    //player_seq.push("yellow")
+    index = player_seq.push("yellow") - 1
+ //   console.log(player_seq)
+    check_final ()
+    check_seq ()
+    check_win ()
+}
+
+function click_blue () {
+    blue_sound.play()
+    blue.classList.add("onclick")
+    setTimeout(function() {;
+        blue.classList.remove("onclick")
+    },150 )
+    //player_seq.push("blue")
+    index = player_seq.push("blue") - 1
+ //   console.log(player_seq)
+    check_final ()
+    check_seq ()
+    check_win ()
+}
+
+// Loosing Function
+function loose () {
+    loose_sound.play()
+    document.body.classList.add("youloose")
+    setTimeout(function() {;
+        document.body.classList.remove("youloose")
+    },100 )
+    game_status[0].innerHTML = "<h1>Game Over, Press Any Key to Restart</h1>"
+    player_seq = []
+    comp_seq = []
+    level = 0
+
+    start_game ()
+}
+
 // onclick event listeners
 /*
 green.addEventListener("click" , click_green)
@@ -244,7 +261,6 @@ red.addEventListener("click" , click_red)
 yellow.addEventListener("click" , click_yellow)
 blue.addEventListener("click" , click_blue)
 */
-
 
 // When page loaded, call the start_game function on keypress
 
